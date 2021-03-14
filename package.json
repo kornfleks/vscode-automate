@@ -15,7 +15,7 @@
     "type": "git",
     "url": "https://github.com/kornfleks/vscode-automate"
   },
-  "homepage": "https://github.com/microsoft/vscode-automate/blob/main/README.md",
+  "homepage": "https://github.com/kornfleks/vscode-automate/blob/master/README.md",
   "icon": "images/icon.png",
   "activationEvents": [
     "*"
