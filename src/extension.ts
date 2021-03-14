@@ -8,9 +8,7 @@ async function createAutomate(): Promise<CommandHandler | undefined> {
   } catch (error) {}
 }
 
-export async function activate(
-  context: vscode.ExtensionContext
-): Promise<void> {
+export function activate(context: vscode.ExtensionContext) {
   let subscription: vscode.Disposable;
 
   const attach = async () => {
@@ -26,13 +24,13 @@ export async function activate(
     }
   };
 
-  attach();
-
   vscode.workspace.onDidChangeConfiguration(async () => {
     subscription?.dispose();
-    attach();
+    await attach();
     showMesssage("Configuration reloaded", "info");
   });
+
+  void attach();
 }
 
 // this method is called when your extension is deactivated
