@@ -2,11 +2,13 @@
 
 A vscode extension to create recipes of templates using ES module.
 
+**_[download](https://marketplace.visualstudio.com/items?itemName=kornfleks.vscode-automate)_**
+
 ## Getting started
 
 ### Example
 
-In this configuration, `root` is the path of the directory containing each template es module. There is two recipes named **Smart Component** and **Dumb Component**. Each recipe declares which template file will be used. Extension is not included because the template has to be ES module (`.js`). The recipe path is a `glob` that precises where the recipe are enabled.
+In this configuration, `root` is the path of the directory containing each template es module. There is two recipes named **Smart Component** and **Dumb Component**. Each recipe declares which template file will be used. Extension is not included because the template has to be ES module (`.js`). The recipe path is a `glob` that precises where the recipe is enabled.
 
 ```json
 {
@@ -107,7 +109,7 @@ Passed as an argument of the functions exposed by template es module.
 ```ts
 interface TemplateContext {
   name: string & {
-    // hosting folderName, ex: /Foo Bar
+    // hosting folderName, ex: Foo Bar
     camel: string; // fooBar
     capital: string; // Foo Bar
     constant: string; // FOO_BAR
