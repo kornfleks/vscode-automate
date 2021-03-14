@@ -1,15 +1,22 @@
 {
   "name": "vscode-automate",
-  "displayName": "vscode-automate",
-  "description": "vscode automate built for legacy",
-  "publisher": "my-delicate-ass",
+  "displayName": "Automate",
+  "description": "Create files templates",
+  "publisher": "kornfleks",
   "version": "0.0.1",
+  "license": "MIT",
   "engines": {
     "vscode": "^1.54.0"
   },
   "categories": [
     "Other"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kornfleks/vscode-automate"
+  },
+  "homepage": "https://github.com/microsoft/vscode-automate/blob/main/README.md",
+  "icon": "images/icon.png",
   "activationEvents": [
     "*"
   ],
@@ -17,10 +24,76 @@
   "contributes": {
     "commands": [
       {
-        "command": "vscode-automate.helloWorld",
-        "title": "Hello World"
+        "command": "automate.recipes",
+        "title": "Automate"
       }
-    ]
+    ],
+    "keybindings": [
+      {
+        "command": "automate.recipes",
+        "key": "ctrl+alt+a",
+        "mac": "cmd+alt+a",
+        "when": "editorFocus"
+      }
+    ],
+    "menus": {
+      "explorer/context": [
+        {
+          "when": "explorerResourceIsFolder",
+          "command": "automate.recipes",
+          "group": "7_modification"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Automate",
+      "properties": {
+        "automate": {
+          "properties": {
+            "root": {
+              "type": "string",
+              "default": ".vscode/templates",
+              "description": "Root templates path."
+            },
+            "recipes": {
+              "type": "array",
+              "default": [],
+              "description": "List of recipes.",
+              "items": {
+                "type": "object",
+                "title": "recipe",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "required": true,
+                    "description": "Name of the template."
+                  },
+                  "templates": {
+                    "type": "array",
+                    "required": true,
+                    "items": {
+                      "type": "string",
+                      "required": true,
+                      "description": "Name of the template file located in the root folder (without extension)."
+                    }
+                  },
+                  "path": {
+                    "type": "string",
+                    "required": false,
+                    "description": "Glob string applied to relative workspace path in order to restrict template usage."
+                  },
+                  "root": {
+                    "type": "string",
+                    "required": false,
+                    "description": "Template files root path (joined to global root path)."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
   },
   "scripts": {
     "vscode:prepublish": "yarn run compile",
@@ -31,16 +104,20 @@
     "test": "node ./out/test/runTest.js"
   },
   "devDependencies": {
-    "@types/vscode": "^1.54.0",
     "@types/glob": "^7.1.3",
     "@types/mocha": "^8.0.4",
     "@types/node": "^12.11.7",
-    "eslint": "^7.19.0",
+    "@types/vscode": "^1.54.0",
     "@typescript-eslint/eslint-plugin": "^4.14.1",
     "@typescript-eslint/parser": "^4.14.1",
+    "eslint": "^7.19.0",
     "glob": "^7.1.6",
     "mocha": "^8.2.1",
     "typescript": "^4.1.3",
     "vscode-test": "^1.5.0"
+  },
+  "dependencies": {
+    "change-case": "^4.1.2",
+    "minimatch": "^3.0.4"
   }
 }
